@@ -1,0 +1,9 @@
+spring:
+  log:
+    base-path: /home/kamjin/model-server1/log/
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: @profileActive@
+  application:
+    name: @pom.artifactId@
