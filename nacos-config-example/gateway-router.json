@@ -1,0 +1,32 @@
+[{
+  "id": "server1-application",
+  "predicates": [{
+    "name": "Path",
+    "args": {
+      "pattern": "/server1-application/**"
+    }
+  }],
+  "uri": "lb://server1-application",
+  "filters": [{
+    "args": {
+      "parts": 1
+    },
+    "name": "StripPrefix"
+  }]
+},{
+  "id": "server2-application",
+  "predicates": [{
+    "name": "Path",
+    "args": {
+      "pattern": "/server2-application/**"
+    }
+  }],
+  "uri": "lb://server2-application",
+  "filters": [{
+    "args": {
+      "parts": 1
+    },
+    "name": "StripPrefix"
+  }]
+}
+]

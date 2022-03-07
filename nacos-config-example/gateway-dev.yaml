@@ -1,0 +1,35 @@
+server:
+  port: 2000
+
+# 健康监测端点暴露
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#====================================== LOG ==========================================================
+logging:
+  #  config: classpath:logback.xml
+  config: classpath:conf/logback-${spring.profiles.active}.xml
+  file:
+    path: /home/kamjin/springcloud-nacos-example/logs/
+
+#====================================== SPRING CLOUD ==========================================================
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: '*'
+            allowedMethods: '*'
