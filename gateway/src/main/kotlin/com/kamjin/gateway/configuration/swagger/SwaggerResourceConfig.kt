@@ -51,15 +51,10 @@ class SwaggerResourceConfig : SwaggerResourcesProvider {
     val log = LoggerFactory.getLogger(SwaggerResourceConfig::class.java)
 
     @Autowired
-    lateinit var routeLocator: RouteLocator
-
-    @Autowired
     lateinit var swaggerFaced: List<SwaggerFacedItem>
 
     override fun get(): List<SwaggerResource> {
         val resources: MutableList<SwaggerResource> = ArrayList()
-        val routes: MutableList<String> = mutableListOf()
-        routeLocator.routes.subscribe { route: Route -> routes.add(route.id) }
         NacosRouteDefinitionRepository.routeDefinitions.stream().forEach { route: RouteDefinition? ->
             route!!.predicates.stream()
                 .filter { predicateDefinition: PredicateDefinition ->
