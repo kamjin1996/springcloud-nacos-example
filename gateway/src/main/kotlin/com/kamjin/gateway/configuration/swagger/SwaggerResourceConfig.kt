@@ -30,11 +30,11 @@ class SwaggerFacedBundleConfig {
 
     @Bean
     @ConfigurationProperties(prefix = "swagger.faced.open")
-    fun open(): SwaggerFacedItem = SwaggerFacedItem()
+    fun open() = SwaggerFacedItem()
 
     @Bean
     @ConfigurationProperties(prefix = "swagger.faced.admin")
-    fun admin(): SwaggerFacedItem = SwaggerFacedItem()
+    fun admin() = SwaggerFacedItem()
 
 }
 
@@ -54,7 +54,7 @@ class SwaggerResourceConfig : SwaggerResourcesProvider {
     lateinit var swaggerFaced: List<SwaggerFacedItem>
 
     override fun get(): List<SwaggerResource> {
-        val resources: MutableList<SwaggerResource> = ArrayList()
+        val resources = mutableListOf<SwaggerResource>()
         NacosRouteDefinitionRepository.routeDefinitions.stream().forEach { route: RouteDefinition? ->
             route!!.predicates.stream()
                 .filter { predicateDefinition: PredicateDefinition ->
@@ -71,8 +71,7 @@ class SwaggerResourceConfig : SwaggerResourcesProvider {
                     )
                 }
         }
-        return resources.stream().sorted(Comparator.comparing { obj: SwaggerResource -> obj.name })
-            .collect(Collectors.toList())
+        return resources.sortedBy { it.name }
     }
 
     private fun addResource(
@@ -95,11 +94,11 @@ class SwaggerResourceConfig : SwaggerResourcesProvider {
 
     private fun swaggerResource(name: String, location: String): SwaggerResource {
         log.debug("name:{},location:{}", name, location)
-        val swaggerResource = SwaggerResource()
-        swaggerResource.name = name
-        swaggerResource.location = location
-        swaggerResource.swaggerVersion = "2.0"
-        return swaggerResource
+        return SwaggerResource().apply {
+            this.name = name
+            this.location = location
+            this.swaggerVersion = "2.0"
+        }
     }
 
     companion object {
