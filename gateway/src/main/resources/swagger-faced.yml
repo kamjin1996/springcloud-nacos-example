@@ -1,0 +1,16 @@
+swagger:
+  faced:
+    open:
+      groupName: 'OPEN前端'
+      groupUrl: 'group=openApi'
+      applications:
+        - server1-application
+        - server2-application
+
+    admin:
+      groupName: 'ADMIN后台'
+      groupUrl: 'group=adminApi'
+      applications:
+        - server1-application
+        - server2-application
+

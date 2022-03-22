@@ -22,6 +22,10 @@ class NacosRouteDefinitionRepository(
 
     private val getConfigTimeoutMs = 6000L
 
+    companion object {
+        lateinit var routeDefinitions: List<RouteDefinition>
+    }
+
     init {
         addListener()
     }
@@ -45,7 +49,10 @@ class NacosRouteDefinitionRepository(
         return listOf()
     }
 
-    override fun getRouteDefinitions() = Flux.fromIterable(routeDefinitions0())
+    override fun getRouteDefinitions(): Flux<RouteDefinition> {
+        Companion.routeDefinitions = routeDefinitions0()
+        return Flux.fromIterable(routeDefinitions0())
+    }
 
     /**
      * 添加Nacos监听
