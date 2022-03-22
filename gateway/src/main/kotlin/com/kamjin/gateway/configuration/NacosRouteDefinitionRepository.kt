@@ -51,7 +51,7 @@ class NacosRouteDefinitionRepository(
 
     override fun getRouteDefinitions(): Flux<RouteDefinition> {
         Companion.routeDefinitions = routeDefinitions0()
-        return Flux.fromIterable(routeDefinitions0())
+        return Flux.fromIterable(Companion.routeDefinitions)
     }
 
     /**
